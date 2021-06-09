@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 //Auth::routes(['verify' => true]);
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/','LoginController@index')->name('login');
+Route::post('/login','LoginController@index')->name('login.post');
+Route::post('/logout','LoginController@logout')->name('login.logout');
 
 Route::prefix('admin')->group(function () {
-
+    Route::get('/','Admin\AdminController@index')->name('admin.index');
 });
 
 Route::prefix('user')->group(function () {
