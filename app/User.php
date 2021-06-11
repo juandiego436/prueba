@@ -13,9 +13,15 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = ['name','email','phone','dni','city_id'];
     protected $dates = ['date_birth','created_at','updated_at','deleted_at'];
     protected $hidden = ['password'];
+    protected $appends = ['age'];
 
     public function city()
     {
         return $this->belongsTo(City::class);
+    }
+
+    public function getAgeAttribute()
+    {
+        return now()->diffInYears($this->date_birth);
     }
 }

@@ -11,11 +11,7 @@
 </head>
 
 <body>
-    <div id="main-wrapper">
-        <main>
-            @yield('content')
-        </main>
-    </div>
+@yield('content')
 <script src="{{ asset('js/app.js') }}"></script>
 @yield('scripts')
 </body>
