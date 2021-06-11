@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
-    //use AuthenticatesUsers;
-    //protected $redirectTo = '/admin/dashboard';
+    use AuthenticatesUsers;
+    protected $redirectTo = '/';
 
     public function __construct()
     {
@@ -56,5 +56,19 @@ class LoginController extends Controller
 
     public function logout()
     {
+        try
+        {
+            if(Auth::guard('admin')->check())
+            {
+                Auth::guard('admin')->logout();
+            }else if(Auth::guard('user')->check()){
+                Auth::guard('user')->logout();
+            }
+
+            return redirect()->route('login');
+        }catch(Exception $e)
+        {
+            Log::error($e);
+        }
     }
 }

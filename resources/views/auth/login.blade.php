@@ -22,7 +22,7 @@
                            <div class="card-body">
                             <form class="form-control" action="{{ route('login.post') }}" method="POST">
                                 @csrf
-                                <h1 class="h3 mb-3 fw-normal">Inicio de sesion</h1>
+                                <h1 class="h3 mb-3 fw-normal text-center">Inicio de sesion</h1>
                                 <label for="inputEmail" class="visually-hidden">Email address</label>
                                 <input type="email" id="email" name="email" class="form-control" placeholder="Email address" value="{{ old('email') }}" required autofocus>
                                 <label for="inputPassword" class="visually-hidden">Password</label>

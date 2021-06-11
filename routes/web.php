@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Auth::routes(['verify' => true]);
+Auth::routes(['verify' => true]);
 
 Route::get('/','LoginController@index')->name('login');
 Route::post('/login','LoginController@login')->name('login.post');
-Route::post('/logout','LoginController@logout')->name('login.logout');
+Route::get('/logout','LoginController@logout')->name('login.logout');
 
 Route::prefix('admin')->group(function () {
     Route::get('/','Admin\AdminController@index')->name('admin.index');

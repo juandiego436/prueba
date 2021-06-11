@@ -1,5 +1,7 @@
-<footer class="footer mt-auto py-3 bg-light">
+<footer class="footer mt-auto my-auto py-3 bg-light">
     <div class="container">
-      <span class="text-center text-muted">Copyrigth@ {{ \Carbon\Carbon::now()->year }} </span>
+        <div class="mx-auto">
+            <span class="text-center">Copyrigth@ {{ \Carbon\Carbon::now()->year }} </span>
+        </div>
     </div>
   </footer>
