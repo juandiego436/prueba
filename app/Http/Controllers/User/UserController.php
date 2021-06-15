@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Inbox;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -17,23 +20,26 @@ class UserController extends Controller
         return view('user.index');
     }
 
-    public function create()
+    public function mail()
     {
-
+        $mails = Inbox::paginate(8);
+        return view('user.mail.index', compact('mails'));
     }
 
-    public function find($id)
+    public function send()
     {
-
+        $title = 'Enviar correo';
+        return view('user.mail.form',compact('title'));
     }
 
-    public function update()
+    public function sendPost(Request $request)
     {
+        try
+        {
 
-    }
-
-    public function delete($id)
-    {
-
+        }catch(Exception $e){
+            Log::error($e);
+            return back()->with('error','Problem ocurred.');
+        }
     }
 }

@@ -30,6 +30,11 @@ Route::prefix('admin')->group(function () {
 
 Route::prefix('user')->group(function () {
     Route::get('/','User\UserController@index')->name('user.index');
+    Route::prefix('mail')->group(function () {
+        Route::get('/','User\UserController@mail')->name('user.mail.index');
+        Route::get('/send','User\UserController@send')->name('user.mail.send');
+        Route::post('/save','User\UserController@sendPost')->name('user.mail.send.post');
+    });
 });
 
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('admin.logs');

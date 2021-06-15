@@ -11,7 +11,7 @@
         @endauth
         @auth('user')
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('user.mail.index') }}">
               <span data-feather="shopping-cart"></span>
               Correos
             </a>
