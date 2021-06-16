@@ -3,9 +3,12 @@
 namespace App\Console\Commands;
 
 use App\Inbox;
+use App\Mail\OrderShipped;
 use App\Notifications\SendMail as NotificationsSendMail;
+use App\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use Mail;
 
 class SendMail extends Command
 {
@@ -42,10 +45,11 @@ class SendMail extends Command
     {
         try
         {
-            $sends = Inbox::where('status','pending')->get();
+            $sends = Inbox::with('user')->where('status','pending')->get();
             foreach($sends as $send)
             {
-                $send->notify(new NotificationsSendMail());
+                $user = User::find($send->user_id);
+                $user->notify(new NotificationsSendMail());
                 $send->status = 'send';
                 $send->save();
             }

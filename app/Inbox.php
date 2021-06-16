@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
@@ -30,5 +31,10 @@ class Inbox extends Model
             default:
                  return '<span class="badge bg-primary">pendiente</span>';
         }
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

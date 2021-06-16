@@ -24,7 +24,7 @@ class UserController extends Controller
 
     public function mail()
     {
-        $mails = Inbox::paginate(8);
+        $mails = Inbox::where('user_id',Auth::user()->id)->paginate(8);
         return view('user.mail.index', compact('mails'));
     }
 

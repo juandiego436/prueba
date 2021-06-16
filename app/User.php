@@ -20,6 +20,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(City::class);
     }
 
+    public function inbox()
+    {
+        return $this->hasMany(Inbox::class);
+    }
+
     public function getAgeAttribute()
     {
         return now()->diffInYears($this->date_birth);
