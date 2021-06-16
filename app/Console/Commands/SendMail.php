@@ -49,7 +49,7 @@ class SendMail extends Command
             foreach($sends as $send)
             {
                 $user = User::find($send->user_id);
-                $user->notify(new NotificationsSendMail());
+                $user->notify(new NotificationsSendMail($send));
                 $send->status = 'send';
                 $send->save();
             }
