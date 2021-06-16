@@ -40,6 +40,8 @@
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $mail->from }}</td>
                                                 <td>{{ $mail->subject }}</td>
+                                                <td>{!! $mail->status() !!}</td>
+                                                <td>{{ $mail->date_formatted }}</td>
                                             </tr>
                                         @empty
                                             <tr>
@@ -100,5 +102,4 @@
       );
 </script>
 @endif
-@endsection
 @endsection

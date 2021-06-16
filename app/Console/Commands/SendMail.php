@@ -1,0 +1,59 @@
+<?php
+
+namespace App\Console\Commands;
+
+use App\Inbox;
+use App\Notifications\SendMail as NotificationsSendMail;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
+
+class SendMail extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'send_mails';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Command description';
+
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
+    public function handle()
+    {
+        try
+        {
+            $sends = Inbox::where('status','pending')->get();
+            foreach($sends as $send)
+            {
+                $send->notify(new NotificationsSendMail());
+                $send->status = 'send';
+                $send->save();
+            }
+            return true;
+        }catch(\Exception $e)
+        {
+            Log::error("Error command" . $e);
+            return false;
+        }
+    }
+}
